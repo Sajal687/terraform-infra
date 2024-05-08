@@ -1,0 +1,13 @@
+name: terraform-infra
+on: 
+  workflow_dispatch
+
+jobs:
+  create_ec2_instance:
+    runs-on: ubuntu-latest
+    steps:
+     - name: run_shell_script
+       run: echo This is a Message.
+
+     - name: second_run
+       run: echo This is a Second msg.
