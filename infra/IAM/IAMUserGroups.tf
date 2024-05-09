@@ -1,5 +1,5 @@
 resource "aws_iam_user_group_membership" "MultiGroups" {
-    user = aws_iam_user_U1.name
+    user = aws_iam_user.U1.name
 
     groups = [
         aws_iam_group.G1.name,
@@ -8,7 +8,7 @@ resource "aws_iam_user_group_membership" "MultiGroups" {
 } 
 
 resource "aws_iam_user_group_membership" "SingleGroups" {
-    user = aws_iam_user_U1.name
+    user = aws_iam_user.U1.name
 
     groups = [
         aws_iam_group.G3.name,
