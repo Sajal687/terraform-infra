@@ -1,0 +1,50 @@
+name: "Apply_TF_Plan"
+on:
+  workflow_dispatch:
+    inputs:
+      path:
+        description: 'Specifies the path of the root terraform module.'
+        required: true
+        type: string
+
+jobs:
+  apply-plan:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ inputs.path }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.1.0
+        
+      - name: terraform-setup
+        uses: hashicorp/setup-terraform@v3
+        with: 
+            terraform_version: "1.1.7"
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+      
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan
+
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+
+      - name: Capture Output in .txt file
+        run: terraform output > ${{ github.workspace }}/output.txt
+
+      - name:  Display Output file
+        run: |
+         cat ${{ github.workspace }}/output.txt
