@@ -29,7 +29,8 @@ jobs:
       
      - name: Terraform Apply
        env:
-           TF_VAR_ec2_name = ${{ github.event.inputs.ec2_name }}
+          TF_VAR_ec2_name: ${{ github.event.inputs.ec2_name }}
+       
        run: |
             cd infra/
             terraform init
