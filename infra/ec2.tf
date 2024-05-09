@@ -1,5 +1,5 @@
 provider "aws" {
-    region = ap-south-1  
+    region = ca-central-1 
 }
 
 resource "aws_instance" "my_instance" {
@@ -7,6 +7,6 @@ resource "aws_instance" "my_instance" {
       instance_type = "t2.micro"
 
       tags = {
-        Name: "var.ec2_name"
+        Name: var.ec2_name
       }
 }
