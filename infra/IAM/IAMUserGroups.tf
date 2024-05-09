@@ -1,4 +1,4 @@
-resource "aws_iam_user_membership" "MultiGroups" {
+resource "aws_iam_user_group_membership" "MultiGroups" {
     user = aws_iam_user_U1.name
 
     groups = [
@@ -7,7 +7,7 @@ resource "aws_iam_user_membership" "MultiGroups" {
     ]
 } 
 
-resource "aws_iam_user_membership" "SingleGroups" {
+resource "aws_iam_user_group_membership" "SingleGroups" {
     user = aws_iam_user_U1.name
 
     groups = [
